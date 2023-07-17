@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		714BA63A2A6541C30055DDA7 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714BA6392A6541C30055DDA7 /* ModelData.swift */; };
+		714BA63C2A65420B0055DDA7 /* ItemModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714BA63B2A65420B0055DDA7 /* ItemModelData.swift */; };
+		714BA63F2A65562F0055DDA7 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714BA63E2A65562F0055DDA7 /* CustomButton.swift */; };
 		71C870F02A652BF500E7CDF9 /* Croid_MRTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C870EF2A652BF500E7CDF9 /* Croid_MRTApp.swift */; };
 		71C870F22A652BF500E7CDF9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C870F12A652BF500E7CDF9 /* ContentView.swift */; };
 		71C870F42A652BF600E7CDF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C870F32A652BF600E7CDF9 /* Assets.xcassets */; };
@@ -34,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		714BA6392A6541C30055DDA7 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		714BA63B2A65420B0055DDA7 /* ItemModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModelData.swift; sourceTree = "<group>"; };
+		714BA63E2A65562F0055DDA7 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		71C870EC2A652BF500E7CDF9 /* Croid-MRT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Croid-MRT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C870EF2A652BF500E7CDF9 /* Croid_MRTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Croid_MRTApp.swift; sourceTree = "<group>"; };
 		71C870F12A652BF500E7CDF9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +77,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		714BA6382A65418A0055DDA7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				714BA6392A6541C30055DDA7 /* ModelData.swift */,
+				714BA63B2A65420B0055DDA7 /* ItemModelData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		714BA63D2A6556180055DDA7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				714BA63E2A65562F0055DDA7 /* CustomButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		71C870E32A652BF500E7CDF9 = {
 			isa = PBXGroup;
 			children = (
@@ -94,8 +117,10 @@
 		71C870EE2A652BF500E7CDF9 /* Croid-MRT */ = {
 			isa = PBXGroup;
 			children = (
+				714BA63D2A6556180055DDA7 /* Components */,
 				71C870EF2A652BF500E7CDF9 /* Croid_MRTApp.swift */,
 				71C870F12A652BF500E7CDF9 /* ContentView.swift */,
+				714BA6382A65418A0055DDA7 /* Model */,
 				71C870F32A652BF600E7CDF9 /* Assets.xcassets */,
 				71C870F52A652BF600E7CDF9 /* Preview Content */,
 			);
@@ -257,8 +282,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				714BA63C2A65420B0055DDA7 /* ItemModelData.swift in Sources */,
 				71C870F22A652BF500E7CDF9 /* ContentView.swift in Sources */,
 				71C870F02A652BF500E7CDF9 /* Croid_MRTApp.swift in Sources */,
+				714BA63A2A6541C30055DDA7 /* ModelData.swift in Sources */,
+				714BA63F2A65562F0055DDA7 /* CustomButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

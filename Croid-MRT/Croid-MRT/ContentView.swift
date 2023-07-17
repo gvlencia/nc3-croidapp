@@ -8,15 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var viewModel = ViewModel()
+    @State private var item: Int = 1
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView{
+            VStack(){
+                Spacer()
+                Picker("Stasiun",selection: $item){
+                    ForEach(viewModel.lokasiStasiun, id:\.self){item in
+                        Text("\(item.nama_stasiun)")
+                    }
+                }.pickerStyle(.wheel)
+                    .task{
+                        viewModel.loadLokasi()
+                    }
+                    .padding()
+                Spacer()
+                CustomButton(text: "Cek Kepadatan Gerbong", action: {print("")}, isBordered: false)
+                    .padding()
+            }
+            .navigationTitle("Pilih Stasiun Anda")
         }
-        .padding()
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
