@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isOnboardingCompleted = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        if isOnboardingCompleted{
+            VStack {
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundColor(.accentColor)
+                Text("Hello, world!")
+            }
+            .padding()
         }
-        .padding()
+        else{
+            WelcomePageView(isOnboardingCompleted: $isOnboardingCompleted)
+        }
     }
 }
 
