@@ -43,7 +43,7 @@ struct WelcomePageView: View {
                     UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
                     isOnboardingCompleted = true
                 } label: {
-                        Label("Cek Keramaian Sekarang", systemImage: "paperplane.fill")
+                        Label("Cek Keramaian Sekarang", systemImage: "figure.wave")
                             .padding()
                             .font(.system(size: 17))
                             .fontWeight(.bold)
