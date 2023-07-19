@@ -16,11 +16,11 @@ enum CrowdStatus {
 }
 
 struct InfoCard: View {
-    
     struct GateInformation {
         var tagLabel: String
         var tagIcon: String
         var tagColor: Color
+        var tagLabelColor: Color
         var description: String
     }
     
@@ -33,6 +33,7 @@ struct InfoCard: View {
                 tagLabel: "Kosong",
                 tagIcon: "door.french.open",
                 tagColor: Constants.Colors.levelGreen,
+                tagLabelColor: .white,
                 description: "Hampir tidak ada penumpang, banyak tempat duduk yang tersedia."
             )
         case .santai:
@@ -40,6 +41,7 @@ struct InfoCard: View {
                 tagLabel: "Santai",
                 tagIcon: "door.french.open",
                 tagColor: Constants.Colors.levelBlue,
+                tagLabelColor: .white,
                 description: "Beberapa penumpang, banyak tempat duduk kosong."
             )
         case .normal:
@@ -47,6 +49,7 @@ struct InfoCard: View {
                 tagLabel: "Normal",
                 tagIcon: "door.french.open",
                 tagColor: Constants.Colors.levelYellow,
+                tagLabelColor: .black,
                 description: "Lebih banyak penumpang, masih ada ruang berdiri yang nyaman."
             )
         case .ramai:
@@ -54,6 +57,7 @@ struct InfoCard: View {
                 tagLabel: "Ramai",
                 tagIcon: "door.french.open",
                 tagColor: Constants.Colors.levelOrange,
+                tagLabelColor: .black,
                 description: "Penumpang memenuhi gerbong, ruang berdiri sangat terbatas."
             )
         case .penuh:
@@ -61,6 +65,7 @@ struct InfoCard: View {
                 tagLabel: "Penuh",
                 tagIcon: "door.french.open",
                 tagColor: Constants.Colors.levelRed,
+                tagLabelColor: .white,
                 description: "Gerbong penuh sesak, sulit untuk bergerak."
             )
         }
