@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		432DD1E02A68871800A3EE39 /* InfoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432DD1DF2A68871800A3EE39 /* InfoCard.swift */; };
+		432DD1E22A6887B700A3EE39 /* TrainInfoTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432DD1E12A6887B700A3EE39 /* TrainInfoTab.swift */; };
 		43BCD5652A654ECD00904162 /* TrainInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BCD5642A654ECD00904162 /* TrainInfoView.swift */; };
 		43BCD56A2A6682D000904162 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BCD5692A6682D000904162 /* Constants.swift */; };
 		71C870F02A652BF500E7CDF9 /* Croid_MRTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C870EF2A652BF500E7CDF9 /* Croid_MRTApp.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		432DD1DF2A68871800A3EE39 /* InfoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCard.swift; sourceTree = "<group>"; };
+		432DD1E12A6887B700A3EE39 /* TrainInfoTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainInfoTab.swift; sourceTree = "<group>"; };
 		43BCD5642A654ECD00904162 /* TrainInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainInfoView.swift; sourceTree = "<group>"; };
 		43BCD5692A6682D000904162 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		71C870EC2A652BF500E7CDF9 /* Croid-MRT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Croid-MRT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +114,8 @@
 				71C870EF2A652BF500E7CDF9 /* Croid_MRTApp.swift */,
 				71C870F12A652BF500E7CDF9 /* ContentView.swift */,
 				43BCD5642A654ECD00904162 /* TrainInfoView.swift */,
+				432DD1E12A6887B700A3EE39 /* TrainInfoTab.swift */,
+				432DD1DF2A68871800A3EE39 /* InfoCard.swift */,
 				71C870F32A652BF600E7CDF9 /* Assets.xcassets */,
 				71C870F52A652BF600E7CDF9 /* Preview Content */,
 			);
@@ -271,10 +277,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				432DD1E22A6887B700A3EE39 /* TrainInfoTab.swift in Sources */,
 				71C870F22A652BF500E7CDF9 /* ContentView.swift in Sources */,
 				43BCD5652A654ECD00904162 /* TrainInfoView.swift in Sources */,
 				71C870F02A652BF500E7CDF9 /* Croid_MRTApp.swift in Sources */,
 				43BCD56A2A6682D000904162 /* Constants.swift in Sources */,
+				432DD1E02A68871800A3EE39 /* InfoCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
