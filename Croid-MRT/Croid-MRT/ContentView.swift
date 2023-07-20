@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isOnboardingCompleted = false
     @State private var showModal = false
     @StateObject var viewModel = ViewModel()
     @State private var nama_stasiun: String = "Lebak Bulus Grab"
@@ -17,68 +18,73 @@ struct ContentView: View {
     let stasiun = ["Lebak Bulus Grab", "Bundaran HI"]
     
     var body: some View {
-        NavigationView{
-            VStack(){
-                Spacer()
-                if viewModel.lokasiStasiun.isEmpty {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .blue))
-                        .scaleEffect(3)
-                } else {
-                    Form{
-                        HStack{
-                            Text("Stasiun")
-                            Spacer()
-                            Button(action:{
-                                isOnStasiun.toggle()
-                            }){
-                                Text(nama_stasiun)
-                                    .foregroundColor(Color.black)
-                            }
-                            .buttonBorderShape(.roundedRectangle)
-                            .buttonStyle(.bordered)
-                            
-                        }
-                        if isOnStasiun{
-                            Picker("Stasiun",selection: $nama_stasiun) {
-                                ForEach(viewModel.lokasiStasiun.filter({$0.nama_stasiun != stasiun_akhir}), id:\.self){item in
-                                    Text("\(item.nama_stasiun)").tag(item.nama_stasiun)
+        if isOnboardingCompleted{
+            NavigationView{
+                VStack(){
+                    Spacer()
+                    if viewModel.lokasiStasiun.isEmpty {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                            .scaleEffect(3)
+                    } else {
+                        Form{
+                            HStack{
+                                Text("Stasiun")
+                                Spacer()
+                                Button(action:{
+                                    isOnStasiun.toggle()
+                                }){
+                                    Text(nama_stasiun)
+                                        .foregroundColor(Color.black)
                                 }
-                            }.pickerStyle(WheelPickerStyle())
-                        }
-                        Picker("Stasiun Akhir", selection: $stasiun_akhir){
-                            ForEach(stasiun, id:\.self){
-                                Text($0)
+                                .buttonBorderShape(.roundedRectangle)
+                                .buttonStyle(.bordered)
+                                
                             }
+                            if isOnStasiun{
+                                Picker("Stasiun",selection: $nama_stasiun) {
+                                    ForEach(viewModel.lokasiStasiun.filter({$0.nama_stasiun != stasiun_akhir}), id:\.self){item in
+                                        Text("\(item.nama_stasiun)").tag(item.nama_stasiun)
+                                    }
+                                }.pickerStyle(WheelPickerStyle())
+                            }
+                            Picker("Stasiun Akhir", selection: $stasiun_akhir){
+                                ForEach(stasiun, id:\.self){
+                                    Text($0)
+                                }
+                            }
+                            
+                            
+                            //                        if isOnTujuan{
+                            //                            Picker("",selection: $stasiun_akhir) {
+                            //                                ForEach(stasiun.filter($0.stasiun != stasiun_akhir), id:\.self){
+                            //                                    Text($0)
+                            //                                }
+                            //                            }.pickerStyle(WheelPickerStyle())
+                            //                        }
                         }
                         
-                        
-//                        if isOnTujuan{
-//                            Picker("",selection: $stasiun_akhir) {
-//                                ForEach(stasiun.filter($0.stasiun != stasiun_akhir), id:\.self){
-//                                    Text($0)
-//                                }
-//                            }.pickerStyle(WheelPickerStyle())
-//                        }
+                        .scrollContentBackground(.hidden)
                     }
                     
-                    .scrollContentBackground(.hidden)
+                    Spacer()
+                    CustomButton(text: "Cek Kepadatan Gerbong", action: {showModal.toggle()}, isBordered: false)
+                        .padding()
+                    NavigationLink("", destination: DetailCrowdKereta(nama_stasiun: nama_stasiun, stasiun_akhir: stasiun_akhir), isActive: $showModal)
+                    
                 }
-                
-                Spacer()
-                CustomButton(text: "Cek Kepadatan Gerbong", action: {showModal.toggle()}, isBordered: false)
-                    .padding()
-                NavigationLink("", destination: DetailCrowdKereta(nama_stasiun: nama_stasiun, stasiun_akhir: stasiun_akhir), isActive: $showModal)
+                .background(Color.gray.opacity(0.1))
+                .task{
+                    viewModel.loadLokasi()
+                }
+                .navigationTitle("Pilih Stasiun Anda")
                 
             }
-            .background(Color.gray.opacity(0.1))
-            .task{
-                viewModel.loadLokasi()
-            }
-            .navigationTitle("Pilih Stasiun Anda")
+        }
+        else{
+            WelcomePageView(isOnboardingCompleted: $isOnboardingCompleted)
         }
     }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
