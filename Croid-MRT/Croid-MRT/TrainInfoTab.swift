@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LeftTrainTab: View {
     var body: some View {
-        ScrollView(.vertical) {
+//        ScrollView(.vertical) {
             ZStack {
                 Image("Lantai")
                     .resizable()
@@ -55,7 +55,7 @@ struct LeftTrainTab: View {
                                 .padding(.top, 16)
                                 .offset(x: -40)
                                 
-                                InfoCard(gateNumber: "Gerbong 6", crowdStatus: index == 1 ? .santai : index == 2 ? .kosong : .penuh)
+                                InfoCard(gateNumber: "Gerbong 0\(index)", crowdStatus: index == 1 ? .santai : index == 2 ? .kosong : .santai)
                                     .padding(.leading, (-100 + 32))
                             }
                             .padding(.top)
@@ -64,8 +64,8 @@ struct LeftTrainTab: View {
                 }
                 .padding(.horizontal)
             }
-        }
-        .scrollIndicators(.hidden)
+//        }
+//        .scrollIndicators(.hidden)
     }
 }
 
@@ -139,7 +139,8 @@ struct RightTrainTab: View {
 
 struct TrainInfoTab_Previews: PreviewProvider {
     static var previews: some View {
-        RightTrainTab()
-        LeftTrainTab()
+        ScrollView {        
+            LeftTrainTab()
+        }
     }
 }
