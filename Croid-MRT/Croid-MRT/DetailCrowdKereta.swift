@@ -65,7 +65,7 @@ struct DetailCrowdKereta: View {
         }
         .task {
             viewModel.loadJadwal()
-            viewModel.loadBerat()
+            viewModel.loadBerat(kode_kereta: filteredJadwalKereta.first?.kereta_id.kereta_id)
         }
         .navigationTitle(nama_stasiun)
         

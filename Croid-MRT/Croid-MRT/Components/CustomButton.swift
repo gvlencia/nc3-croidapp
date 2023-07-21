@@ -12,23 +12,23 @@ struct CustomButton: View {
     var action: () -> Void
     var isBordered: Bool
     var width: Double = .infinity
-    var color: Color = .blue
+//    var color: Color = .blue
     
     var body: some View {
         if (isBordered) {
             Button(action: action){
                 HStack{
                     Spacer()
-                    Image(systemName: "paperplane.fill")
+                    Image(systemName: "train.side.front.car")
                         .font(.system(size: 17))
                         .foregroundColor(.white)
                     Text(text)
 //                        .frame(maxWidth: width)
-                        .foregroundColor(color)
+                        .foregroundColor(Color(red: 0, green: 0.34, blue: 0.72))
                         .padding()
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(color, lineWidth: 2)
+                                .stroke(Color(red: 0, green: 0.34, blue: 0.72), lineWidth: 2)
                         )
                     Spacer()
                 }
@@ -40,7 +40,7 @@ struct CustomButton: View {
             Button(action: action) {
                 HStack{
                     Spacer()
-                    Image(systemName: "paperplane.fill")
+                    Image(systemName: "train.side.front.car")
                         .font(.system(size: 17))
                         .foregroundColor(.white)
                     Text(text)
@@ -53,7 +53,7 @@ struct CustomButton: View {
                 }
                
             }
-            .background(color)
+            .background(Color(red: 0, green: 0.34, blue: 0.72))
             .cornerRadius(1000)
         }
     }

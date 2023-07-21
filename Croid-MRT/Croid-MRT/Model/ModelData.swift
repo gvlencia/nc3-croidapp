@@ -30,3 +30,9 @@ struct JadwalKereta: Codable, Hashable{
     let stasiun_akhir: String
     let waktu: String
 }
+
+struct Gerbong {
+    let id = UUID()
+    let nomorGerbong: String
+    let beratGerbong: CrowdStatus
+}
