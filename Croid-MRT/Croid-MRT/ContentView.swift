@@ -24,10 +24,8 @@ struct ContentView: View {
                     Spacer()
                     if viewModel.lokasiStasiun.isEmpty {
                         ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: .blue))
-                            .scaleEffect(3)
                     } else {
-                        Form{
+                        Form {
                             Section {
                                 HStack{
                                     Text("Stasiun")

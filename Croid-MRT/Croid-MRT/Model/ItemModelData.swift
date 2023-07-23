@@ -15,13 +15,13 @@ class ViewModel: ObservableObject {
     @Published var keretaToShow: [Gerbong]?
     
     func loadLokasi() {
-//        guard let url = URL(string: "https://backend-croid-api.vercel.app/api/lokasistasiunmrt/") else {
-//            return
-//        }
-        
-        guard let url = URL(string: "http://127.0.0.1:8000/api/lokasistasiunmrt/") else {
+        guard let url = URL(string: "https://backend-croid-api.vercel.app/api/lokasistasiunmrt/") else {
             return
         }
+        
+//        guard let url = URL(string: "http://127.0.0.1:8000/api/lokasistasiunmrt/") else {
+//            return
+//        }
         
         let task = URLSession.shared.dataTask(with: url) {[weak
             self] data, _, error in
@@ -45,13 +45,13 @@ class ViewModel: ObservableObject {
     }
     
     func loadJadwal() {
-//        guard let url = URL(string: "https://backend-croid-api.vercel.app/api/jadwalkereta/") else {
-//            return
-//        }
-        
-        guard let url = URL(string: "http://127.0.0.1:8000/api/jadwalkereta/") else {
+        guard let url = URL(string: "https://backend-croid-api.vercel.app/api/jadwalkereta/") else {
             return
         }
+        
+//        guard let url = URL(string: "http://127.0.0.1:8000/api/jadwalkereta/") else {
+//            return
+//        }
         
         let task = URLSession.shared.dataTask(with: url) {[weak
             self] data, _, error in
@@ -75,12 +75,13 @@ class ViewModel: ObservableObject {
     }
     
     func loadBerat(kode_kereta : String?) {
-//        guard let url = URL(string: "https://backend-croid-api.vercel.app/api/beratgerbongkereta/") else {
-//            return
-//        }
-        guard let url = URL(string: "http://127.0.0.1:8000/api/beratgerbongkereta/") else {
+        guard let url = URL(string: "https://backend-croid-api.vercel.app/api/beratgerbongkereta/") else {
             return
         }
+        
+//        guard let url = URL(string: "http://127.0.0.1:8000/api/beratgerbongkereta/") else {
+//            return
+//        }
         
         let task = URLSession.shared.dataTask(with: url) {[weak
             self] data, _, error in

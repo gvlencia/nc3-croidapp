@@ -25,16 +25,11 @@ struct TrainInfoView: View {
     var filteredJadwalKereta: [JadwalKereta] {
         return viewModel.jadwalKereta.filter( { $0.posisi_kereta.nama_stasiun == nama_stasiun && ($0.waktu >= "16:00:00" && $0.waktu <= "17:30:00") && $0.stasiun_akhir == stasiun_akhir})
     }
-//    var kode_kereta: String? {
-//        return filteredJadwalKereta.first?.kereta_id.kereta_id
-//    }
     
     var body: some View {
         ScrollView {
-            
             VStack {
                 // MARK: Quick info card
-//                let x = print(filteredJadwalKereta)
                 VStack(alignment: .leading, spacing: 16) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Tujuan akhir kereta:")
@@ -45,18 +40,26 @@ struct TrainInfoView: View {
                             .font(.callout)
                     }
                     VStack(alignment: .leading, spacing: 4) {
-                        
-                        Text("Gerbong yang mungkin dapat dimasuki:")
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
-                        
                         VStack(alignment: .leading, spacing: 12) {
-                            
-                            ForEach(0..<(viewModel.keretaToShow?.count ?? 1), id:\.self) {index in
-                                if index % 2 != 1 {
-                                    HStack(spacing: 36) {
-                                        QuickInfoRow(crowdstatus: viewModel.keretaToShow?[index].beratGerbong ?? .normal, namaGerbong: "Gerbong \(viewModel.keretaToShow?[index].nomorGerbong ?? "Unknown")")
-                                        QuickInfoRow(crowdstatus: viewModel.keretaToShow?[index+1].beratGerbong ?? .normal, namaGerbong: "Gerbong \(viewModel.keretaToShow?[index+1].nomorGerbong ?? "Unknown")")
+                            if viewModel.isLoading {
+                                VStack {
+                                    ProgressView()
+                                    Text("Mengambil data")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                }
+                            } else {
+                                Text("Gerbong yang mungkin dapat dimasuki:")
+                                    .font(.caption2)
+                                    .foregroundColor(.secondary)
+                                
+                                ForEach(0..<(viewModel.keretaToShow?.count ?? 1), id:\.self) {index in
+                                    if index % 2 != 1 {
+                                        HStack(spacing: 36) {
+                                            QuickInfoRow(crowdstatus: viewModel.keretaToShow?[index].beratGerbong ?? .normal, namaGerbong: "Gerbong \(viewModel.keretaToShow?[index].nomorGerbong ?? "Unknown")")
+                                            QuickInfoRow(crowdstatus: viewModel.keretaToShow?[index+1].beratGerbong ?? .normal, namaGerbong: "Gerbong \(viewModel.keretaToShow?[index+1].nomorGerbong ?? "Unknown")")
+                                        }
                                     }
                                 }
                             }
@@ -69,8 +72,8 @@ struct TrainInfoView: View {
                     Text("Data Terakhir Diperbaharui: " + getCurrentTime())
                         .font(.caption2)
                         .foregroundColor(Color(uiColor: .tertiaryLabel))
-                    
                 }
+                .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
                 .padding(.horizontal, 12)
                 .background(.white)
@@ -78,11 +81,14 @@ struct TrainInfoView: View {
                 .zIndex(1)
                 .padding(16)
                 
-                LeftTrainTab()
+                LeftTrainTab(viewModel: viewModel)
                     .clipped()
             }
         }
+        .frame(maxWidth: .infinity)
         .background(Color(uiColor: .systemGroupedBackground))
+        .navigationTitle("\(nama_stasiun)")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     func getCurrentTime() -> String {
@@ -98,7 +104,7 @@ struct QuickInfoRow: View {
     let crowdstatus : CrowdStatus
     let namaGerbong: String
     var body: some View {
-        HStack {
+        HStack(spacing: 8) {
             Text(namaGerbong)
                 .frame(width: 76, alignment: .leading)
                 .font(.footnote)
@@ -107,7 +113,7 @@ struct QuickInfoRow: View {
             case .kosong:
                 Text("Kosong")
                     .font(.caption2)
-                //                .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity)
                     .padding(.vertical, 2)
                     .padding(.horizontal, 8)
                     .foregroundColor(.white)
@@ -116,7 +122,7 @@ struct QuickInfoRow: View {
             case .santai:
                 Text("Santai")
                     .font(.caption2)
-                //                .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity)
                     .padding(.vertical, 2)
                     .padding(.horizontal, 8)
                     .foregroundColor(.white)
@@ -125,7 +131,7 @@ struct QuickInfoRow: View {
             case .normal:
                 Text("Normal")
                     .font(.caption2)
-                //                .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity)
                     .padding(.vertical, 2)
                     .padding(.horizontal, 8)
                     .foregroundColor(.black)
@@ -134,7 +140,7 @@ struct QuickInfoRow: View {
             case .ramai:
                 Text("Ramai")
                     .font(.caption2)
-                //                .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity)
                     .padding(.vertical, 2)
                     .padding(.horizontal, 8)
                     .foregroundColor(.white)
@@ -143,21 +149,21 @@ struct QuickInfoRow: View {
             case .penuh:
                 Text("Penuh")
                     .font(.caption2)
-                //                .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity)
                     .padding(.vertical, 2)
                     .padding(.horizontal, 8)
                     .foregroundColor(.white)
                     .background(Constants.Colors.levelRed)
                     .cornerRadius(.infinity)
-//            default:
-//                Text("No Respon")
-//                    .font(.caption2)
-//                //                .frame(maxWidth: .infinity)
-//                    .padding(.vertical, 2)
-//                    .padding(.horizontal, 8)
-//                    .foregroundColor(.white)
-//                    .background(Constants.Colors.levelRed)
-//                    .cornerRadius(.infinity)
+                //            default:
+                //                Text("No Respon")
+                //                    .font(.caption2)
+                //                //                .frame(maxWidth: .infinity)
+                //                    .padding(.vertical, 2)
+                //                    .padding(.horizontal, 8)
+                //                    .foregroundColor(.white)
+                //                    .background(Constants.Colors.levelRed)
+                //                    .cornerRadius(.infinity)
             }
         }
     }

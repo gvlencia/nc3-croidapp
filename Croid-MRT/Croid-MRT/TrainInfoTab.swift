@@ -9,11 +9,17 @@ import SwiftUI
 
 
 struct LeftTrainTab: View {
-    @StateObject var viewModel = ViewModel()
-//    var gerbong : Gerbong
-//    let kode_kereta: String
+    @ObservedObject var viewModel: ViewModel
+    
     var body: some View {
-//        ScrollView(.vertical) {
+        if viewModel.isLoading {
+            VStack {
+                ProgressView()
+                Text("Mengambil Data")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        } else {
             ZStack {
                 Image("Lantai")
                     .resizable()
@@ -64,7 +70,7 @@ struct LeftTrainTab: View {
                                 }
                                 .padding(.top, 16)
                                 .offset(x: -40)
-
+                                
                                 InfoCard(gateNumber: gerbong.nomorGerbong, crowdStatus: gerbong.beratGerbong)
                                     .padding(.leading, (-100 + 32))
                             }
@@ -74,11 +80,7 @@ struct LeftTrainTab: View {
                 }
                 .padding(.horizontal)
             }
-            .onAppear{
-                viewModel.loadBerat(kode_kereta: "MRT-0001")
-            }
-//        }
-//        .scrollIndicators(.hidden)
+        }
     }
 }
 
@@ -153,8 +155,8 @@ struct RightTrainTab: View {
 
 struct TrainInfoTab_Previews: PreviewProvider {
     static var previews: some View {
-        ScrollView {        
-            LeftTrainTab()
+        ScrollView {
+            LeftTrainTab(viewModel: ViewModel())
         }
     }
 }
