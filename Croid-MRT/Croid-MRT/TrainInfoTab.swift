@@ -9,6 +9,8 @@ import SwiftUI
 
 
 struct LeftTrainTab: View {
+    @StateObject var viewModel = ViewModel()
+    
     var body: some View {
 //        ScrollView(.vertical) {
             ZStack {
@@ -27,12 +29,13 @@ struct LeftTrainTab: View {
                 .padding(.horizontal)
                 
                 VStack(alignment: .leading, spacing: 0) {
-                    ForEach(1...6, id:\.self) { index in
+                    ForEach(viewModel.keretaToShow ?? [], id:\.id) { gerbong in
+                        
                         HStack(alignment: .top, spacing: 0) {
                             ZStack {
-                                Image(index == 1
+                                Image(gerbong.nomorGerbong == "1"
                                       ? "Gerbong Depan"
-                                      : index == 6
+                                      : gerbong.nomorGerbong == "6"
                                       ? "Gerbong Belakang"
                                       : "Gerbong Tengah")
                                 .scaledToFit()
@@ -55,7 +58,8 @@ struct LeftTrainTab: View {
                                 .padding(.top, 16)
                                 .offset(x: -40)
                                 
-                                InfoCard(gateNumber: "Gerbong 0\(index)", crowdStatus: index == 1 ? .santai : index == 2 ? .kosong : .santai)
+                                InfoCard(gateNumber: gerbong.nomorGerbong,
+                                         crowdStatus: gerbong.beratGerbong)
                                     .padding(.leading, (-100 + 32))
                             }
                             .padding(.top)
@@ -63,6 +67,9 @@ struct LeftTrainTab: View {
                     }
                 }
                 .padding(.horizontal)
+            }
+            .onAppear {
+                viewModel.loadBerat()
             }
 //        }
 //        .scrollIndicators(.hidden)

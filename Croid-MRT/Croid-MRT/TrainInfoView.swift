@@ -16,7 +16,8 @@ enum CrowdStatus {
 }
 
 struct TrainInfoView: View {
-    @State var selectedTab = 1
+//    @State var selectedTab = 1
+    @StateObject var viewModel = ViewModel()
     
     var body: some View {
         ScrollView {
@@ -66,6 +67,10 @@ struct TrainInfoView: View {
                 .cornerRadius(8)
                 .zIndex(1)
                 .padding(16)
+                
+                if viewModel.isLoading {
+                    Text("Loading...")
+                }
                 
                 LeftTrainTab()
                     .clipped()
