@@ -53,8 +53,14 @@ struct TrainInfoView: View {
                                 ForEach(0..<(viewModel.keretaToShow?.count ?? 1), id:\.self) {index in
                                     if index % 2 != 1 {
                                         HStack(spacing: 36) {
-                                            QuickInfoRow(crowdstatus: viewModel.keretaToShow?[index].beratGerbong ?? .normal, namaGerbong: "Gerbong \(viewModel.keretaToShow?[index].nomorGerbong ?? "Unknown")")
-                                            QuickInfoRow(crowdstatus: viewModel.keretaToShow?[index+1].beratGerbong ?? .normal, namaGerbong: "Gerbong \(viewModel.keretaToShow?[index+1].nomorGerbong ?? "Unknown")")
+                                            if (nama_stasiun == "Lebak Bulus Grab" || nama_stasiun == "Bundaran HI"){
+                                                QuickInfoRow(crowdstatus: .kosong, namaGerbong: "Gerbong \(viewModel.keretaToShow?[index].nomorGerbong ?? "Unknown")")
+                                                QuickInfoRow(crowdstatus: .kosong, namaGerbong: "Gerbong \(viewModel.keretaToShow?[index+1].nomorGerbong ?? "Unknown")")
+                                            } else{
+                                                QuickInfoRow(crowdstatus: viewModel.keretaToShow?[index].beratGerbong ?? .normal, namaGerbong: "Gerbong \(viewModel.keretaToShow?[index].nomorGerbong ?? "Unknown")")
+                                                QuickInfoRow(crowdstatus: viewModel.keretaToShow?[index+1].beratGerbong ?? .normal, namaGerbong: "Gerbong \(viewModel.keretaToShow?[index+1].nomorGerbong ?? "Unknown")")
+                                            }
+                                            
                                         }
                                     }
                                 }
@@ -76,7 +82,7 @@ struct TrainInfoView: View {
                 .zIndex(1)
                 .padding(16)
                 
-                LeftTrainTab(viewModel: viewModel)
+                LeftTrainTab(viewModel: viewModel, nama_stasiun: nama_stasiun)
                     .clipped()
             }
         }

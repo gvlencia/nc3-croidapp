@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LeftTrainTab: View {
     @ObservedObject var viewModel: ViewModel
+    let nama_stasiun: String
     
     var body: some View {
         if viewModel.isLoading {
@@ -46,17 +47,25 @@ struct LeftTrainTab: View {
                                       ? "Gerbong Belakang"
                                       : "Gerbong Tengah")
                                 .scaledToFit()
-                                VStack {
-                                    Spacer()
-                                    switch gerbong.beratGerbong {
-                                    case .kosong: Image("Bar Kosong").scaledToFit()
-                                    case .santai: Image("Bar Santai").scaledToFit()
-                                    case .normal: Image("Bar Normal").scaledToFit()
-                                    case .ramai: Image("Bar Ramai").scaledToFit()
-                                    case .penuh: Image("Bar Penuh").scaledToFit()
+                                if (nama_stasiun == "Lebak Bulus Grab" || nama_stasiun == "Bundaran HI"){
+                                    VStack{
+                                        Spacer()
+                                        Image("Bar Kosong").scaledToFit()
                                     }
-                                    
+                                } else {
+                                    VStack {
+                                        Spacer()
+                                        switch gerbong.beratGerbong {
+                                        case .kosong: Image("Bar Kosong").scaledToFit()
+                                        case .santai: Image("Bar Santai").scaledToFit()
+                                        case .normal: Image("Bar Normal").scaledToFit()
+                                        case .ramai: Image("Bar Ramai").scaledToFit()
+                                        case .penuh: Image("Bar Penuh").scaledToFit()
+                                        }
+                                        
+                                    }
                                 }
+                                
                             }
                             
                             Group {
@@ -71,8 +80,13 @@ struct LeftTrainTab: View {
                                 .padding(.top, 16)
                                 .offset(x: -40)
                                 
-                                InfoCard(gateNumber: gerbong.nomorGerbong, crowdStatus: gerbong.beratGerbong)
-                                    .padding(.leading, (-100 + 32))
+                                if (nama_stasiun == "Lebak Bulus Grab" || nama_stasiun == "Bundaran HI"){
+                                    InfoCard(gateNumber: gerbong.nomorGerbong, crowdStatus: .kosong)
+                                        .padding(.leading, (-100 + 32))
+                                } else {
+                                    InfoCard(gateNumber: gerbong.nomorGerbong, crowdStatus: gerbong.beratGerbong)
+                                        .padding(.leading, (-100 + 32))
+                                }
                             }
                             .padding(.top)
                         }
@@ -156,7 +170,7 @@ struct RightTrainTab: View {
 struct TrainInfoTab_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView {
-            LeftTrainTab(viewModel: ViewModel())
+            LeftTrainTab(viewModel: ViewModel(), nama_stasiun: "Lebak Bulus Grab")
         }
     }
 }
