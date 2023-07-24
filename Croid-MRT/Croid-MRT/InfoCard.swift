@@ -77,7 +77,7 @@ struct InfoCard: View {
                 }
                 .font(.caption)
                 .fontWeight(.semibold)
-                .foregroundColor(.white)
+                .foregroundColor(gateInformation.tagLabelColor)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
                 .background(gateInformation.tagColor)

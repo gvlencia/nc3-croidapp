@@ -81,10 +81,10 @@ struct LeftTrainTab: View {
                                 .offset(x: -40)
                                 
                                 if (nama_stasiun == "Lebak Bulus Grab" || nama_stasiun == "Bundaran HI"){
-                                    InfoCard(gateNumber: gerbong.nomorGerbong, crowdStatus: .kosong)
+                                    InfoCard(gateNumber: "Gerbong \(gerbong.nomorGerbong)", crowdStatus: .kosong)
                                         .padding(.leading, (-100 + 32))
                                 } else {
-                                    InfoCard(gateNumber: gerbong.nomorGerbong, crowdStatus: gerbong.beratGerbong)
+                                    InfoCard(gateNumber: "Gerbong \(gerbong.nomorGerbong)", crowdStatus: gerbong.beratGerbong)
                                         .padding(.leading, (-100 + 32))
                                 }
                             }

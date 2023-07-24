@@ -144,7 +144,7 @@ struct QuickInfoRow: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 2)
                     .padding(.horizontal, 8)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .background(Constants.Colors.levelOrange)
                     .cornerRadius(.infinity)
             case .penuh:
