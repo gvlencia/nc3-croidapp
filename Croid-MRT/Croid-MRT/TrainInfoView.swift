@@ -18,13 +18,9 @@ enum CrowdStatus {
 struct TrainInfoView: View {
     let nama_stasiun: String
     let stasiun_akhir: String
+    let kode_kereta: String?
     @State var selectedTab = 1
     @StateObject var viewModel = ViewModel()
-    @State private var kode_kereta: String?
-    
-    var filteredJadwalKereta: [JadwalKereta] {
-        return viewModel.jadwalKereta.filter( { $0.posisi_kereta.nama_stasiun == nama_stasiun && ($0.waktu >= "16:00:00" && $0.waktu <= "17:30:00") && $0.stasiun_akhir == stasiun_akhir})
-    }
     
     var body: some View {
         ScrollView {
@@ -65,8 +61,7 @@ struct TrainInfoView: View {
                             }
                         }
                     }.task {
-                        viewModel.loadJadwal()
-                        viewModel.loadBerat(kode_kereta: filteredJadwalKereta.first?.kereta_id.kereta_id ?? "MRT-0002")
+                        viewModel.loadBerat(kode_kereta: kode_kereta ?? "MRT-0002")
                     }
                     
                     Text("Data Terakhir Diperbaharui: " + getCurrentTime())
@@ -171,6 +166,6 @@ struct QuickInfoRow: View {
 
 struct TrainInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        TrainInfoView(nama_stasiun: "Lebak Bulus Grab", stasiun_akhir: "Lebak Bulus Grab")
+        TrainInfoView(nama_stasiun: "Lebak Bulus Grab", stasiun_akhir: "Lebak Bulus Grab", kode_kereta: "MRT-0001")
     }
 }

@@ -10,9 +10,9 @@ import SwiftUI
 struct DetailCrowdKereta: View {
     let nama_stasiun: String
     let stasiun_akhir: String
+    let kode_kereta: String?
     @StateObject var viewModel = ViewModel()
     @State private var timeNow: String = ""
-    @State private var kode_kereta: String?
     
     var filteredJadwalKereta: [JadwalKereta] {
         return viewModel.jadwalKereta.filter( { $0.posisi_kereta.nama_stasiun == nama_stasiun && ($0.waktu >= "16:00:00" && $0.waktu <= "17:30:00") && $0.stasiun_akhir == stasiun_akhir})
@@ -46,12 +46,9 @@ struct DetailCrowdKereta: View {
                             Text("\(item.waktu)")
                         }
                     }
-                    .onAppear{
-                        kode_kereta = filteredJadwalKereta.first?.kereta_id.kereta_id
+                    HStack{
+                        Text(kode_kereta ?? "MRT-No gada")
                     }
-//                    HStack{
-//                        Text(kode_kereta)
-//                    }
                     ForEach(viewModel.beratKereta.filter({$0.kereta_id.kereta_id == kode_kereta}), id:\.self){beratItem in
                         HStack{
                             Text("Gerbong \(beratItem.nomor_gerbong):")
@@ -65,7 +62,7 @@ struct DetailCrowdKereta: View {
         }
         .task {
             viewModel.loadJadwal()
-            viewModel.loadBerat(kode_kereta: filteredJadwalKereta.first?.kereta_id.kereta_id)
+            viewModel.loadBerat(kode_kereta: kode_kereta)
         }
         .navigationTitle(nama_stasiun)
         
@@ -87,6 +84,6 @@ struct DetailCrowdKereta: View {
 
 struct DetailCrowdKereta_Previews: PreviewProvider {
     static var previews: some View {
-        DetailCrowdKereta(nama_stasiun: "Lebak Bulus Grab", stasiun_akhir: "Lebak Bulus Grab")
+        DetailCrowdKereta(nama_stasiun: "Lebak Bulus Grab", stasiun_akhir: "Lebak Bulus Grab", kode_kereta: "MRT-0001")
     }
 }

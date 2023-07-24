@@ -63,6 +63,7 @@ class ViewModel: ObservableObject {
                 let jadwalKereta = try JSONDecoder().decode([JadwalKereta].self, from: data)
                 DispatchQueue.main.async {
                     self?.jadwalKereta = jadwalKereta
+                    
                 }
             }
             catch {

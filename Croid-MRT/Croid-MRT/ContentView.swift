@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var stasiun_akhir: String = "Bundaran HI"
     @State private var isOnStasiun: Bool = false
     @State private var isOnTujuan: Bool = false
+    @State private var kode_kereta: String? = "MRT-0001"
     let stasiun = ["Lebak Bulus Grab", "Bundaran HI"]
     
     var body: some View {
@@ -62,14 +63,19 @@ struct ContentView: View {
                     }
                     
                     Spacer()
-                    CustomButton(text: "Cek Kepadatan Gerbong", action: {showModal.toggle()}, isBordered: false)
+                    CustomButton(text: "Cek Kepadatan Gerbong", action: {
+                        showModal.toggle()
+                        kode_kereta = viewModel.jadwalKereta.filter( { $0.posisi_kereta.nama_stasiun == nama_stasiun && ($0.waktu >= getCurrentTime()) && $0.stasiun_akhir == stasiun_akhir}).first?.kereta_id.kereta_id
+                        print(kode_kereta)
+                    }, isBordered: false)
                         .padding()
-                    NavigationLink("", destination: TrainInfoView(nama_stasiun: nama_stasiun, stasiun_akhir: stasiun_akhir), isActive: $showModal)
-                    
+                    NavigationLink("", destination: TrainInfoView(nama_stasiun: nama_stasiun, stasiun_akhir: stasiun_akhir, kode_kereta: kode_kereta), isActive: $showModal)
+//                    NavigationLink("", destination: DetailCrowdKereta(nama_stasiun: nama_stasiun, stasiun_akhir: stasiun_akhir), isActive: $showModal)
                 }
                 .background(Color.gray.opacity(0.1))
                 .task{
                     viewModel.loadLokasi()
+                    viewModel.loadJadwal()
                 }
                 .navigationTitle("Pilih Stasiun Anda")
                 
@@ -78,6 +84,13 @@ struct ContentView: View {
         else{
             WelcomePageView(isOnboardingCompleted: $isOnboardingCompleted)
         }
+    }
+    func getCurrentTime() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        let currentTime = Date()
+        let formattedTime = dateFormatter.string(from: currentTime)
+        return formattedTime
     }
 }
 
