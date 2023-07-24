@@ -31,7 +31,7 @@ struct WelcomePageView: View {
                     .font(.system(size: 15))
                     .foregroundColor(Color(red: 0.56, green: 0.56, blue: 0.58))
                 Spacer()
-                Image("placeholder")
+                Image("AppLogo")
                 Text("Jadikan #UbahJakarta lebih nyaman dan aman dengan mengetahui tingkat keramaian MRT anda")
                     .font(.system(size:12))
                     .multilineTextAlignment(.center)
